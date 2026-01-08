@@ -10,7 +10,7 @@ services:
       - key: AIRFLOW__CORE__EXECUTOR
         value: LocalExecutor
       - key: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
-        value: postgresql+psycopg2://neondb_owner:YOUR_PASSWORD@YOUR_HOST.neon.tech/neondb
+        fromSecret: NEON_DB_CONN  # <-- on utilise un secret
       - key: AIRFLOW__CORE__FERNET_KEY
         generate: true
       - key: AIRFLOW__WEBSERVER__SECRET_KEY
