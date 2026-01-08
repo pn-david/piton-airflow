@@ -1,1 +1,17 @@
-
+services:
+  - type: web
+    name: piton-airflow
+    env: docker
+    plan: free
+    autoDeploy: true
+    startCommand: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin && (airflow webserver & airflow scheduler)"
+    healthCheckPath: /health
+    envVars:
+      - key: AIRFLOW__CORE__EXECUTOR
+        value: LocalExecutor
+      - key: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+        value: postgresql+psycopg2://neondb_owner:YOUR_PASSWORD@YOUR_HOST.neon.tech/neondb
+      - key: AIRFLOW__CORE__FERNET_KEY
+        generate: true
+      - key: AIRFLOW__WEBSERVER__SECRET_KEY
+        generate: true
