@@ -1,0 +1,7 @@
+boto3
+psycopg2-binary
+obspy
+pandas
+numpy
+apache-airflow-providers-amazon
+apache-airflow-providers-postgres
