@@ -1,10 +1,10 @@
 services:
-  - type: web  # on garde "web" pour avoir l'URL publique (Airflow UI)
+  - type: web
     name: piton-airflow
     env: docker
     plan: free
     autoDeploy: true
-    region: oregon  # ou votre région
+    buildCommand: ""  # <-- important : désactive le build standard gunicorn
     startCommand: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin && (airflow webserver & airflow scheduler)"
     healthCheckPath: /health
     envVars:
